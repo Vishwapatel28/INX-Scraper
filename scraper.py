@@ -50,13 +50,20 @@ def clean_phone(v):
     return clean(v)
 
 def driver_factory():
-    o=Options()
+    o = Options()
+
+    o.binary_location = "/usr/bin/chromium"
+
     o.add_argument("--headless=new")
+    o.add_argument("--no-sandbox")
+    o.add_argument("--disable-dev-shm-usage")
     o.add_argument("--disable-gpu")
     o.add_argument("--window-size=1920,1080")
     o.add_argument("--log-level=3")
     o.add_argument("--disable-notifications")
+
     o.add_experimental_option("excludeSwitches", ["enable-logging"])
+
     return webdriver.Chrome(options=o)
 
 def collect_urls(driver, page_from=None, page_to=None):
